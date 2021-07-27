@@ -41,7 +41,7 @@ export class AlarmasComponent implements OnInit {
   }
 
   cargarNotificaciones() {
-    this._dataService.notificaciones(5)
+    this._dataService.notificaciones(this._usuario.cliente.cliente_id)
     .subscribe( (resp: any) => {
     // console.log('Respuesta: ', resp['taginfo'] );
     const notificaciones: any = resp['notificaciones'];
@@ -61,7 +61,7 @@ export class AlarmasComponent implements OnInit {
   }
 
   actualizarMedios() {
-    this._dataService.updateMedioNotificaciones(5, this.telefono1, this.correo1, this.correo2)
+    this._dataService.updateMedioNotificaciones(this._usuario.cliente.cliente_id, this.telefono1, this.correo1, this.correo2)
       .subscribe( (resp: any) => {
         // console.log('respuesta guardar limites: ', resp );
         Swal.fire('OK', resp.respuesta, 'success');
@@ -69,7 +69,7 @@ export class AlarmasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._dataService.ObtenerMedioNotificaciones(5)
+    this._dataService.ObtenerMedioNotificaciones(this._usuario.cliente.cliente_id)
       .subscribe( (resp: any ) => {
         // console.log('respuesta medios: ', resp);
         this.telefono1 = resp.medios.telefono1 === 'null' ? 'Sin definir' : resp.medios.telefono1;

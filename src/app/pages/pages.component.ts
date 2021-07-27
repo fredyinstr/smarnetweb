@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { esLocale } from 'ngx-bootstrap/locale';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-pages',
@@ -7,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _localeService: BsLocaleService) { 
+              defineLocale('es', esLocale);
+              this._localeService.use('es');
+  }
 
   ngOnInit() {
   }

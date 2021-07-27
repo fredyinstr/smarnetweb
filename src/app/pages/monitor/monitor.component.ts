@@ -83,7 +83,7 @@ export class MonitorComponent implements OnInit {
 }
 
   ngOnInit() {
-    console.log("Iniciando monitor...");
+    // console.log("Iniciando monitor...");
     
     // this._dataService.tagsPorCliente(2)
     //   .subscribe((resp: any) => {
@@ -94,10 +94,10 @@ export class MonitorComponent implements OnInit {
     if (this._usuario.tags.length === 0)
         this.router.navigate(['login']);
     this.tags = this._usuario.tags;
-    console.log("tags: ", this.tags);
-    console.log("Cadena ecoded: ", this.hexToBase64("030101"));
-    console.log("Cadena ecoded: ", this.hexToBase64("030000"));
-    console.log("Cadena ecoded: ", this.hexToBase64("030001"));
+    // console.log("tags: ", this.tags);
+    // console.log("Cadena ecoded: ", this.hexToBase64("030101"));
+    // console.log("Cadena ecoded: ", this.hexToBase64("030000"));
+    // console.log("Cadena ecoded: ", this.hexToBase64("030001"));
     
     
 

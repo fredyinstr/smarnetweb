@@ -11,14 +11,14 @@
             <div class="form-group row">
                 <label for="fd" class="col-sm-1 align-self-center">Desde</label>
                 <div class="col-sm-2 align-self-center">
-                    <input type="text" [(ngModel)]="fd" name="fd" placeholder="Desde" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+                    <input type="text" [(ngModel)]="fd" name="fd" placeholder="Desde" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', showWeekNumbers:false }">
                 </div>
                 <div class="col-sm-3">
                     <timepicker [showMeridian]="ismeridian" [(ngModel)]="hd" name="hd"></timepicker>
                 </div>
                 <label for="fh" class="col-sm-1 align-self-center">Hasta</label>
                 <div class="col-sm-2 align-self-center">
-                    <input type="text" [(ngModel)]="fh" name="fh" placeholder="Hasta" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+                    <input type="text" [(ngModel)]="fh" name="fh" placeholder="Hasta" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', showWeekNumbers:false }">
                 </div>
                 <div class="col-sm-3">
                     <timepicker [showMeridian]="ismeridian" [(ngModel)]="hh" name="hh"></timepicker>

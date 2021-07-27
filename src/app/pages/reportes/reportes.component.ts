@@ -5,31 +5,14 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Swal from 'sweetalert2'; // https://www.npmjs.com/package/sweetalert2
 import { ExportToCsv } from 'export-to-csv';
+import { ExportExcelService } from 'src/app/services/exportExcel.service';
+// import { esLocale } from 'ngx-bootstrap/locale';
+// import { defineLocale } from 'ngx-bootstrap/chronos';
+// import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
-var data = [
-  {
-    name: 'Test 1',
-    age: 13,
-    average: 8.2,
-    approved: true,
-    description: "using 'Content here, content here' "
-  },
-  {
-    name: 'Test 2',
-    age: 11,
-    average: 8.2,
-    approved: true,
-    description: "using 'Content here, content here' "
-  },
-  {
-    name: 'Test 4',
-    age: 10,
-    average: 8.2,
-    approved: true,
-    description: "using 'Content here, content here' "
-  },
-];
- 
+
+
+
   const options = { 
     fieldSeparator: ';',
     quoteStrings: '"',
@@ -68,13 +51,18 @@ export class ReportesComponent implements OnInit {
   repDesde = '';
   repHasta = '';
   reporte = [];
+  reporte1 = [];
   objetoTagSeleccionado = null;
   status = '';
 
   
   
   constructor( private _dataService: DataService, 
-    private _usuario: UsuarioService) { }
+               private _usuario: UsuarioService, 
+               private excelService: ExportExcelService,
+               ) { 
+                
+               }
     
     retornaFecha( fecha ) {
       const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
@@ -92,18 +80,23 @@ export class ReportesComponent implements OnInit {
     }
 
     generarCsv() {
-      options.title = document.getElementById('descripcion').innerHTML;
-      const csvExporter = new ExportToCsv(options);
-      csvExporter.generateCsv(this.reporte);
+      // options.title = document.getElementById('descripcion').innerHTML;
+      // const csvExporter = new ExportToCsv(options);
+      // csvExporter.generateCsv(this.reporte1);
+      this.generarExcel();
+    }
+
+    generarExcel() {
+      this.excelService.exportAsExcelFile(this.reporte1, 'reporte_excel');
     }
     
     generarPdf () {
       const descripcion = 'VARSTRACKING V1.3 - Reporte ' + this.objetoTagSeleccionado.tag_descripcion;
-    console.log("Desde: ", this.fechaDesde);
+      // console.log("Desde: ", this.fechaDesde);
     
-    // this._dataService.loadChart(this.tag_id, this.fechaDesde, this.fechaHasta)
-    //   .subscribe((resp: any) => {
-    //     console.log('Reporte para pdf: ', resp.data);
+      // this._dataService.loadChart(this.tag_id, this.fechaDesde, this.fechaHasta)
+      //   .subscribe((resp: any) => {
+      //     console.log('Reporte para pdf: ', resp.data);
         // return;
         const doc = new jsPDF();
         const col = [['#', 'Fecha', 'Valor','#','Fecha', 'Valor','#','Fecha', 'Valor']];
@@ -116,8 +109,8 @@ export class ReportesComponent implements OnInit {
         const totalFilas = this.reporte.length;
         const tamanoColumna = Math.floor(totalFilas / 3);
         var turnoColumna = 0;
-        console.log("Total filas: ", totalFilas);
-        console.log("tamaño columna: ", tamanoColumna);
+        // console.log("Total filas: ", totalFilas);
+        // console.log("tamaño columna: ", tamanoColumna);
         // return;
         var indice = 1;
         this.reporte.forEach(element => {
@@ -160,11 +153,11 @@ export class ReportesComponent implements OnInit {
   }
 
   selectTag(event) {
-    console.log("Tag seleccionado: ", event.target.value);
+    // console.log("Tag seleccionado: ", event.target.value);
     
     this.tagSeleccionado = event.target.value;
     this.objetoTagSeleccionado = this.tag_list.find(elemento => elemento.tag_id === Number(event.target.value));
-    console.log("Objeto tag: ", this.objetoTagSeleccionado);
+    // console.log("Objeto tag: ", this.objetoTagSeleccionado);
     
   }
 
@@ -179,7 +172,7 @@ export class ReportesComponent implements OnInit {
 
   buscar() {
     this.pdf = false;
-    console.log("Buscando...");
+    // console.log("Buscando...");
     this.status = 'Generando reporte...';
     const millisDesde = new Date(this.convertirFecha(this.fd, this.hd)).getTime();
     const millisHasta = new Date(this.convertirFecha(this.fh, this.hh)).getTime();
@@ -213,15 +206,26 @@ export class ReportesComponent implements OnInit {
     // console.log('Fecha hasta: ', this.fechaHasta);
     // console.log('Unit: ', this.unit);
     
-    console.log("Desde: ", this.fechaDesde);
+    // console.log("Desde: ", this.fechaDesde);
     
     this._dataService.loadChart(this.tag_id, this.fechaDesde, this.fechaHasta)
     .subscribe((resp: any) => {
       this.reporte = resp.data;
-      console.log("Reporte: ", this.reporte);
+      // console.log("Reporte: ", this.reporte);
+      this.conversion();
       this.status = '';
       this.pdf = true;
       });
+  }
+
+  conversion () {
+    let arrConv = [];
+    let conv = this.reporte.forEach((r)=>{
+      arrConv.push(new Object({fecha: new Date(r.t).toLocaleDateString(), hora: new Date(r.t).toTimeString(), valor: Number(r.y)}));
+    })
+    this.reporte1 = arrConv;
+    console.log("convertido: ", arrConv);
+    
   }
 
   ngOnInit() {
@@ -233,7 +237,7 @@ export class ReportesComponent implements OnInit {
     this.hd.setHours(0, 0, 0, 0);
     this.hh = new Date();
     this.tag_list = this._usuario.tags;
-        console.log(this.tag_list);
+        // console.log(this.tag_list);
     // return;
     // this._dataService.tagsPorCliente(1)
     //   .subscribe((resp: any) => {

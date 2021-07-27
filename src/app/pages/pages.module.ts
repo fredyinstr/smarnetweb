@@ -11,6 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 
+// import { defineLocale } from 'ngx-bootstrap/chronos';
+// import { enGbLocale } from 'ngx-bootstrap/locale';
+// defineLocale('es', enGbLocale);
+
 // Componentes
 import { HeaderComponent } from '../shared/header/header.component';
 import { SidebarComponent } from '../shared/sidebar/sidebar.component';

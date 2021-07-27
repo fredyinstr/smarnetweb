@@ -19,7 +19,7 @@ export class UsuarioService {
 
     constructor(public http: HttpClient) {
         this.cargarStorage();
-        console.log('Servicio de usuario listo!', this.tags );
+        // console.log('Servicio de usuario listo!', this.tags );
     }
 
     estaLogueado() {
@@ -78,7 +78,7 @@ export class UsuarioService {
                 this.usuario = resp.usuario;
                 this.cliente = resp.cliente;
                 this.tags = resp.tags;
-                console.log("Respuesta login: ", resp);
+                // console.log("Respuesta login: ", resp);
                 
                 // this.usuario = resp.usuario;
                 // this.id = resp.usuario_id;
