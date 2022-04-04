@@ -9,6 +9,7 @@ import { ChartsModule } from 'ng2-charts';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { UiSwitchModule } from 'ngx-toggle-switch';
 
 
 // import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -58,6 +59,7 @@ import { ChartWideComponent } from '../componentes/chart-wide/chart-wide.compone
         JustgageModule,
         ChartsModule,
         BrowserModule,
+        UiSwitchModule,
         BsDatepickerModule.forRoot(),
         TimepickerModule.forRoot(),
         BrowserAnimationsModule

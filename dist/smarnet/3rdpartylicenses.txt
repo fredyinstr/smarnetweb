@@ -305,6 +305,9 @@ ngx-bootstrap/timepicker
 
 ngx-bootstrap/utils
 
+ngx-toggle-switch
+MIT
+
 raphael
 MIT
 The MIT License

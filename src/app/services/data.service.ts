@@ -98,4 +98,14 @@ export class DataService {
     const url = URL_API + 'data/' + tag;
     return this.http.get(url);
   }
+
+  onOffMotobomba(estado) {
+    const url = URL_SERVICIOS + 'iotdata/updateBomba/'+estado;
+    return this.http.get(url);
+  }
+
+  estadoBomba() {
+    const url = URL_SERVICIOS + 'iotdata/statusBomba';
+    return this.http.get(url);
+  }
 }

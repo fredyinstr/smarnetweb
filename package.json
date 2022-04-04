@@ -36,6 +36,7 @@
     "lodash": "^4.17.20",
     "ng2-charts": "^2.0.0-beta.9",
     "ngx-bootstrap": "^5.1.0",
+    "ngx-toggle-switch": "^2.0.5",
     "raphael": "^2.2.7",
     "rxjs": "~6.3.3",
     "sweetalert2": "^8.19.0",
