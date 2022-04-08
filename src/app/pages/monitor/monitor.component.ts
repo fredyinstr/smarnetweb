@@ -107,6 +107,27 @@ retornaFecha( fecha ) {
   return mesdia + ' ' + d.getHours() + ':' + String(minutes > 9 ? minutes : '0' + minutes);
 }
 
+retornaFecha1 ( fecha ) {
+  const ahora = new Date().getTime();
+  const diferencia = Math.ceil((ahora - new Date(fecha).getTime())/60000);
+  return diferencia;
+
+  if (fecha === "")
+    return "";
+  const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+  const d = new Date(fecha);
+  const hoy = new Date();
+
+  const mes = meses[d.getMonth()];
+  const dia = d.getDate();
+  let mesdia = mes + ' ' + dia;
+  if ((d.getMonth === hoy.getMonth) && (d.getDate() === hoy.getDate())) {
+    mesdia = 'Hoy';
+  }
+  const minutes = d.getMinutes();
+  return mesdia + ' ' + d.getHours() + ':' + String(minutes > 9 ? minutes : '0' + minutes);
+}
+
 updateMotobomba(e) {
   console.log("update: ", e);
   this.MotoBomba.estado = "ACTUALIZANDO"
