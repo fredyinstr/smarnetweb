@@ -110,7 +110,13 @@ retornaFecha( fecha ) {
 retornaFecha1 ( fecha ) {
   const ahora = new Date().getTime();
   const diferencia = Math.ceil((ahora - new Date(fecha).getTime())/60000);
-  return diferencia;
+  if (diferencia < 60) {
+    return "hace " + diferencia + " m";
+  } else {
+    const horas = Math.floor(diferencia / 60);
+    const minutos = diferencia % 60;
+    return "hace " + horas + " h " + minutos + " m"
+  }
 
   if (fecha === "")
     return "";
